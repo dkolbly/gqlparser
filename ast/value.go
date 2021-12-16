@@ -64,6 +64,9 @@ func (v *Value) Value(vars map[string]interface{}) (interface{}, error) {
 		return nil, nil
 	case ListValue:
 		var val []interface{}
+		if v.Children != nil {
+			val = make([]interface{}, 0, len(v.Children))
+		}
 		for _, elem := range v.Children {
 			elemVal, err := elem.Value.Value(vars)
 			if err != nil {
