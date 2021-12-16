@@ -271,6 +271,23 @@ values:
                     Name: "id"
                     Value: [1,2]
 
+  - name: empty list
+    # make sure the empty list doesn't resolve as null
+    input: '{ f(id: []) }'
+    ast: |
+      <QueryDocument>
+        Operations: [OperationDefinition]
+        - <OperationDefinition>
+            Operation: Operation("query")
+            SelectionSet: [Selection]
+            - <Field>
+                Alias: "f"
+                Name: "f"
+                Arguments: [Argument]
+                - <Argument>
+                    Name: "id"
+                    Value: []
+
 types:
   - name: common types
     input: 'query ($string: String, $int: Int, $arr: [Arr], $notnull: [Arr!]!) { f }'
